@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+
+<!-- Title Header -->
+<div class="px-4 py-5 my-5 text-center">
+    <h2 class="display-5 fw-bold">About Spectra</h2>
+    <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='img/logo_lowQ.png') }}" alt="logo">
+ 	<p class="lead mb-4">The Spectra Project allows you to:
+	<ul>
+		<li>preview the Relevant Values of the MS data you uploaded</li>
+		<li>run a MS analysis to determine most probable peptides from the MS data</li>
+		<li>and match the resulting peptides with known proteins.</li>
+	</ul>
+	</p>
+</div>
+
+{% endblock %}

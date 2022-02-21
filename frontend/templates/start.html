@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Start{% endblock %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+
+<!-- Title Header -->
+<div class="px-4 py-5 my-5 text-center">
+    <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='img/logo_lowQ.png') }}" alt="" width="90" height="57">
+    <h1 class="display-5 fw-bold">Project Spectra</h1>
+ 	<p class="lead mb-4"><strong>Our GOAL is to identify peptides from high sensitivity LC-MS/MS raw data</strong></p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <a role="button" href="{{ url_for('upload') }}" class="btn btn-primary btn-lg px-4 gap-3">Get Started</a>
+        <button type="button" class="btn btn-outline-secondary btn-lg px-4">About Spectra</button>
+    </div>
+</div>
+
+{% endblock %}

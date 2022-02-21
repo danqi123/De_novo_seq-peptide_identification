@@ -1,0 +1,3 @@
+[console_scripts]
+project_spectra = project_spectra.cli:main
+

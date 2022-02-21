@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block progressbar %}
+{% if (output is defined) and (not output.empty) and (not vals) %}
+<!-- 50% Progress Bar-->
+<div class="progress">
+	<div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+		 aria-valuemax="100"></div>
+</div>
+{% endif %}
+
+<!-- 75% Progress Bar-->
+{% if (vals is defined) and (not vals.empty) %}
+<div class="progress">
+	<div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+		 aria-valuemax="100"></div>
+</div>
+{% endif %}
+
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-5 text-center">
+	<h1 class="display-5 fw-bold">Explore Your Data </h1>
+	<h4 style="padding:20px"><strong>Spectra allows you:</strong>
+        <br>
+        <br>
+        Preview the Relevant Values of the MS data you uploaded
+        <br>
+        Run a MS analysis to determine most probable peptides from the MS data
+        <br>
+        Match the resulting peptides with known proteins.</h4>
+
+	<button type="button" data-toggle="collapse" class="btn btn-info" data-target="#summary" aria-expanded="false" aria-controls="summary">Relevant Values</button>
+	<button type="button" data-toggle="collapse" class="btn btn-primary" data-target="#peptides" aria-expanded="false">Determine Peptides
+	</button>
+	<button type="button" data-toggle="collapse" class="btn btn-info" data-target="#proteins" aria-expanded="false">Protein Matches
+	</button>
+
+	<!-- Ms File Summary -->
+	<div id="summary" class="container-fluid mb-5 mt-5 collapse">
+<!-- Collapsed Summary -->
+		<h2>MS File Summary </h2>
+        <p><strong>The total number of spectrum(scan) in MS2 is {{size}}</strong></p>
+        <br>
+        <p>Please select one specific scan number here: </p>
+		<form method="POST" action="/parse">
+            <input type="number" name="textbox" placeholder="e.g. 0 or 3" autocomplete="off">
+            <button class="btn btn-danger" type="submit" name="submit">Submit</button>
+
+            <p> <strong>{{my_info}}</strong></p>
+            <p> <strong>{{upload_info}}</strong></p>
+            <p> <strong>* The M/Z of Precursor: {{p_mz}}</strong></p>
+			<p> <strong>* The Charge of Precursor: {{p_c}}</strong></p>
+            <table border=1, bgcolor="#faebd7", width="400", align="center">
+                <thead>
+    <tr>
+    <th>Number of Peak</th>
+    <th>Min M/Z</th>
+    <th>Max M/Z</th>
+      <th>Peak with Max intensity </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>{{number_of_peak}}</td>
+    <td>{{min_m_z}}</td>
+    <td>{{max_m_z}}</td>
+        <td>{{max_m_z_peak}}</td>
+    </tr>
+    </tbody>
+                </table>
+            </form>
+        <br>
+        <br>
+            <form method="POST" action="/plot.png">
+            <p> <strong> Here comes the de-isotoped MS2 spectrum plot.... :)</strong></p>
+                 <p>Please select one specific scan number here: </p>
+            <input type="number" name="textbox" placeholder="e.g. 0 or 3" autocomplete="off">
+            <button class="btn btn-danger" type="submit" name="submit">Submit</button>
+
+            <br>
+            </form>
+
+    </div>
+
+	<!-- Predicted Peptides -->
+	<div class="container-fluid mb-5 mt-5">
+		<!-- Collapsed Peptide Results -->
+		<div id="peptides" class="collapse">
+            <h2>Predicted Peptides </h2>
+		<p>Please select One Scan Number here:</p>
+
+        <form method="POST" action="/peptide">
+
+        <input type="number" name="textbox" placeholder="e.g. 0 or 3" autocomplete="off">
+        <button class="btn btn-danger" type="submit" name="submit">Submit</button>
+
+        <div id="peptide" class="container-fluid mb-5 mt-5" align="center">
+            {% if data_table_html %}
+            <p><strong>Predicted Sequence and its corresponding SCORE(sum of intensity) </strong></p>
+            {% endif %}
+            {{ data_table_html | safe }}
+        </div>
+        {% if show_seq_peak %}
+            <p><strong>Predicted Sequence and its corresponding peak list: </strong></p>
+        {%  endif %}
+       {% for elem in show_seq_peak %}
+       <li>{{elem}}</li>
+       {% endfor %}
+
+      <p>{{error_info}}</p>
+        </form>
+        </div>
+
+	<!-- Matched Proteins -->
+
+	<div id="proteins" class="collapse">
+        <input type="button" class="btn btn-danger" onclick="location.href='/proteins';" value="Find Matches"/>
+		<p>Carry out a peptide match to determine which proteins contain each peptide.</p>
+	</div>
+
+</div>
+
+{% endblock %}
+

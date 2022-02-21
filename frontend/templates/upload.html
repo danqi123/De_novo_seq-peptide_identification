@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}Upload{% endblock %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block progressbar %}
+<!-- Progress Bar-->
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<!-- Upload MS Data -->
+   <div class="container-fluid mt-5 text-center">
+        <h2>Select File to Upload </h2>
+        <p> <strong>Please select one MS2 file (.mzML format)</strong></p>
+        <div class="container-fluid mb-5 mt-5">
+            <form action="#" method="POST" enctype="multipart/form-data" class="input-group">
+                <div class="d-flex justify-content-center">
+                    <input type="file" class="form-control" id="file" name="file" data-bs-toggle="tooltip" data-bs-placement="top" title="Upload a file containing MS2 data (.mzML file)." aria-label="Upload">
+                    <button type="submit" class="btn btn btn-primary ms-1" >Upload File</button>
+                    <input type="submit" id="clearall" class="btn btn-danger ms-1" value="Clear Contents" name="clearall">
+                </div>
+		    </form>
+	    </div>
+   </div>
+
+{% endblock %}
+

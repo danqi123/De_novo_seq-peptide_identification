@@ -1,0 +1,17 @@
+README.md
+setup.py
+project_spectra/Parse_data_MS2.py
+project_spectra/Spec_peptide.py
+project_spectra/__init__.py
+project_spectra/cli.py
+project_spectra/constants.py
+project_spectra/identifier.py
+project_spectra/models.py
+project_spectra/startup.py
+project_spectra.egg-info/PKG-INFO
+project_spectra.egg-info/SOURCES.txt
+project_spectra.egg-info/dependency_links.txt
+project_spectra.egg-info/entry_points.txt
+project_spectra.egg-info/not-zip-safe
+project_spectra.egg-info/requires.txt
+project_spectra.egg-info/top_level.txt
