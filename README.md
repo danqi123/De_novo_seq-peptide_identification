@@ -151,6 +151,7 @@ $ docker run --name project_test -p 5005:5005 -d project_4:latest
 * [PIR](https://research.bioinformatics.udel.edu/peptidematchapi2/match_get?peptides=): PIR peptide match API
 
 ## Comments
+* For programming lab exercise, please **do not** take it as commercial use case.
 * We recommend you to use our data for testing related functions and CLI, since some .mzML data from Web do not have information of precursor charge. 
 * Unfortunately not all scans can be identified by our algorithm, you can try scan 0 or 3 for testing.
 
